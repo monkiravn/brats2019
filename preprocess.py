@@ -1,6 +1,7 @@
 import numpy as np
 from keras.utils import to_categorical
 
+num_class = 4
 
 def bbox2_3D(img):
 
@@ -29,11 +30,17 @@ def normalize_3D_image(img):
 
 # Return label to categorical
 def label_num2cat(label,num_class):
-  new_mask = np.zeros(label.shape + (num_class,))
-  mask = to_categorical(label,5)
-  for i, c in enumerate([0,1,2,4]):
-    new_mask[:,:,:,i] = mask[:,:,:,c]
-  return new_mask
+    if (len(label.shape)==4):
+        new_mask = np.zeros(label.shape + (num_class,))
+        mask = to_categorical(label,5)
+        for i, c in enumerate([0,1,2,4]):
+            new_mask[:,:,:,i] = mask[:,:,:,c]
+    elif (len(label.shape)==3):
+        new_mask = np.zeros(label.shape + (num_class,))
+        mask = to_categorical(label, 5)
+        for i, c in enumerate([0, 1, 2, 4]):
+            new_mask[:, :, i] = mask[:, :, c]
+    return new_mask
 
 
 # Return label from categorical
