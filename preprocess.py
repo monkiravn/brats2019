@@ -59,7 +59,6 @@ def label_cat2num(cat_lbl):
 
 def preprocess(img, mask):
     img = normalize_3D_image(img)
-    print(img.shape)
     new_mask = label_num2cat(mask)
     rmin, rmax, cmin, cmax, zmin, zmax = bbox2_3D(img)
     return img[:,cmin:cmax], new_mask[cmin:cmax]
