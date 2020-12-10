@@ -39,7 +39,7 @@ def label_num2cat(label,num_class):
         new_mask = np.zeros(label.shape + (num_class,))
         mask = to_categorical(label, 5)
         for i, c in enumerate([0, 1, 2, 4]):
-            new_mask[:, :, i] = mask[:, :, c]
+            new_mask[:,:, :, i] = mask[:,:, :, c]
     return new_mask
 
 
