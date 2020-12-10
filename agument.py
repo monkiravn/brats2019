@@ -18,6 +18,8 @@ def rot_2D_random(img, lbl):
 def random_flip_2D(img, lbl):
 
     aug = np.random.randint(1, 4)
+    flip_np_lbl = lbl
+    flip_img = img
     np_lbl = label_cat2num(lbl)
     if (aug == 1):
         flip_img = np.flipud(img)

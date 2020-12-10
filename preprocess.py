@@ -30,17 +30,16 @@ def normalize_3D_image(img):
 
 # Return label to categorical
 def label_num2cat(label,num_class):
+    mask_cat = np.zeros(label.shape + (num_class,))
+    mask = to_categorical(label, 5)
     if (len(label.shape)==4):
-        new_mask = np.zeros(label.shape + (num_class,))
-        mask = to_categorical(label,5)
         for i, c in enumerate([0,1,2,4]):
-            new_mask[:,:,:,i] = mask[:,:,:,c]
+            mask_cat[:,:,:,i] = mask[:,:,:,c]
     elif (len(label.shape)==3):
-        new_mask = np.zeros(label.shape + (num_class,))
         mask = to_categorical(label, 5)
         for i, c in enumerate([0, 1, 2, 4]):
-            new_mask[:,:, :, i] = mask[:,:, :, c]
-    return new_mask
+            mask_cat[:,:, :, i] = mask[:,:, :, c]
+    return mask_cat
 
 
 # Return label from categorical
